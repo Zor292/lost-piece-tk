@@ -1,25 +1,20 @@
-# JoyPiece Ticket Bot v3
+# LostPiece Ticket Bot
 
-## Railway Variables
+## التشغيل
 
-| Variable | Value |
-|---|---|
-| `DISCORD_TOKEN` | توكن البوت |
-| `CLIENT_ID` | Client ID للبوت |
-| `GUILD_ID` | ID السيرفر |
-| `MONGODB_URI` | mongodb+srv://jp1_2026:zoro_amak3@cluster0.gzhivoi.mongodb.net/islam-bot |
+1. انسخ `.env.example` وسمّه `.env`
+2. ضع توكن البوت وايدي السيرفر
+3. شغّل:
 
-## Start Command
 ```
+npm install
 npm start
 ```
 
-## اسم التذاكر
-ticket-1-username
-ticket-2-username
-...
+## البيانات
+يتم حفظ كل البيانات محلياً في مجلد `src/data/`:
+- `tickets.json` - التذاكر
+- `warnings.json` - التحذيرات
+- `counter.json` - عداد التذاكر
 
-## قاعدة البيانات
-- التذاكر محفوظة في MongoDB (تبقى بعد إعادة تشغيل البوت)
-- التحذيرات محفوظة في MongoDB
-- العداد محفوظ في MongoDB (لا يعود للصفر)
+لا يحتاج MongoDB.
