@@ -3,7 +3,7 @@ module.exports = {
   LOG_CHANNEL_ID: '1492287189373947964',
   IMAGE_URL: 'https://media.discordapp.net/attachments/1492287170566815874/1492431243240017951/IMG_1260.png?ex=69db4e68&is=69d9fce8&hm=9842274279450c9d6fe28e4422c3c03f20e71fd78f3abe60fc5dd852f8571850&=&format=webp&quality=lossless&width=1493&height=813',
   EMBED_COLOR: 0x000000,
-  PREFIX: '!',
+  PREFIX: '-',
 
   ROLES: {
     SENIOR: '1492286818454995136',
