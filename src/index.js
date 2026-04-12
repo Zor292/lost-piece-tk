@@ -30,7 +30,7 @@ const client = new Client({
 
 client.once('ready', async () => {
   console.log(`[LostPiece] Bot is online: ${client.user.tag}`);
-  client.user.setActivity('LostPiece | !tickets', { type: 3 });
+
   await connectDB();
   await loadOpenTickets();
 });
