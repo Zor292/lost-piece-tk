@@ -17,6 +17,22 @@ const { createTicket, closeTicket, openTickets, loadOpenTickets } = require('./t
 const { handleCommand } = require('./commands');
 const { connectDB } = require('./database');
 
+// cooldown: channelId -> { senior: timestamp, support: timestamp }
+const callCooldowns = new Map();
+const CALL_COOLDOWN_MS = 2 * 60 * 60 * 1000; // ساعتين
+
+function checkCallCooldown(channelId, type) {
+  const now = Date.now();
+  const cd = callCooldowns.get(channelId) || {};
+  if (cd[type] && now - cd[type] < CALL_COOLDOWN_MS) {
+    const remaining = Math.ceil((CALL_COOLDOWN_MS - (now - cd[type])) / 60000);
+    return remaining; // دقائق متبقية
+  }
+  cd[type] = now;
+  callCooldowns.set(channelId, cd);
+  return 0;
+}
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -122,6 +138,9 @@ client.on('interactionCreate', async (interaction) => {
         const typeConfig = config.TICKET_TYPES[ticketData.type];
         if (!interaction.member.roles.cache.has(typeConfig.adminRole) && !interaction.member.permissions.has(PermissionFlagsBits.Administrator))
           return interaction.reply({ content: 'ليس لديك صلاحية.', ephemeral: true });
+        const remaining = checkCallCooldown(channelId, 'senior');
+        if (remaining > 0)
+          return interaction.reply({ content: `لا يمكن استدعاء العليا الآن، **${remaining} دقيقة**.`, ephemeral: true });
         await interaction.reply({ content: `<@&${config.ROLES.SENIOR}>` });
 
       } else if (customId.startsWith('ticket_support_')) {
@@ -131,6 +150,9 @@ client.on('interactionCreate', async (interaction) => {
         const typeConfig = config.TICKET_TYPES[ticketData.type];
         if (!interaction.member.roles.cache.has(typeConfig.adminRole) && !interaction.member.permissions.has(PermissionFlagsBits.Administrator))
           return interaction.reply({ content: 'ليس لديك صلاحية.', ephemeral: true });
+        const remaining = checkCallCooldown(channelId, 'support');
+        if (remaining > 0)
+          return interaction.reply({ content: `⏳ لا يمكن استدعاء السبورت الآن، انتظر **${remaining} دقيقة**.`, ephemeral: true });
         await interaction.reply({ content: `<@&${typeConfig.supportRole}>` });
 
       } else if (customId.startsWith('ticket_claim_')) {
@@ -165,7 +187,7 @@ client.on('interactionCreate', async (interaction) => {
 
         const confirmEmbed = new EmbedBuilder()
           .setTitle('تأكيد الإغلاق')
-          .setDescription('هل أنت متأكد من إغلاق هذا التكت؟\nسيتم حذف القناة وإرسال السجل للوق.')
+          .setDescription('هل أنت متأكد من إغلاق هذا التكت؟\nسيتم حذف القناة .')
           .setColor(0xe74c3c)
           .setFooter({ text: 'Developed by firas' })
           .setTimestamp();
