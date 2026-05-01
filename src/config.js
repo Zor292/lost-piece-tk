@@ -1,0 +1,47 @@
+module.exports = {
+  TICKET_CATEGORY_ID: '1492286988261523678',
+  LOG_CHANNEL_ID: '1492287189373947964',
+  RATING_CHANNEL_ID: '1499706453617807410',
+  IMAGE_URL: 'https://cdn.discordapp.com/attachments/1122142274520883253/1499705610533601331/163D32C2-CA62-40DB-A5F9-2D6BEE02015E.png?ex=69f5c530&is=69f473b0&hm=e220c5189cb304ffd75f0c2b05c38a0586d3b7657248bda222784624d52c446f&',
+  EMBED_COLOR: 0x1a6b8a,
+  PREFIX: '-',
+  ROLES: {
+    SENIOR: '1492286818454995136',
+    SUPPORT: '1313877058891419658',
+    TECH_ADMIN: '1492286846988849197',
+    PURCHASE_ADMIN: '1492286846988849197',
+    COMPLAINT_ADMIN: '1492286818454995136',
+    COMPENSATION_ADMIN: '1492286818454995136',
+  },
+  TICKET_TYPES: {
+    tech: {
+      label: 'الدعم الفني',
+      emoji: '🔧',
+      adminRole: '1492286846988849197',
+      title: 'مرحبا بك في الدعم الفني الخاص بـ LostPiece',
+      supportRole: '1492286846988849197',
+    },
+    purchase: {
+      label: 'تكت شراء',
+      emoji: '🛒',
+      adminRole: '1492286818454995136',
+      title: 'مرحبا بك في تكت الشراء في LostPiece',
+      supportRole: '1492286818454995136',
+    },
+    complaint: {
+      label: 'تكت شكوى',
+      emoji: '📢',
+      adminRole: '1492286818454995136',
+      title: 'مرحبا بك في تكت الشكوى في LostPiece',
+      supportRole: '1492286818454995136',
+    },
+    compensation: {
+      label: 'تكت تعويض',
+      emoji: '💰',
+      adminRole: '1492286818454995136',
+      title: 'مرحبا بك في تكت التعويض في LostPiece',
+      supportRole: '1492286818454995136',
+    },
+  },
+  RULES_DESCRIPTION: `**قوانين التكت:**\n\nيرجى عدم ازعاج الطاقم الاداري بالمنشن\n\nفي حال عدم الرد على التكت في غضون 10 دقائق سيتم تقفيل التكت\n\nيرجى الالتزام بالاحترام المتبادل بين الادارة والاعضاء\n\n**بالنسبة للادارة**\n\nفي حال استلم اداري اخر التكت يمنع انك تدخل بالتكت مهما كان السبب`,
+};
